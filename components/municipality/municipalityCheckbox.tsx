@@ -1,6 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Map } from "ol";
+import { Layer } from "ol/layer";
 
-export function MunicipalityCheckbox() {
+export function MunicipalityCheckbox({
+  setMapLayers,
+  map,
+}: {
+  setMapLayers: Dispatch<SetStateAction<Layer[]>>;
+  map: Map;
+}) {
   const [municipalityChecked, setMunicipalityChecked] = useState(false);
 
   useEffect(() => {}, [municipalityChecked]);
