@@ -1,6 +1,15 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { Map } from "ol";
 import { Layer } from "ol/layer";
+import VectorLayer from "ol/layer/Vector";
+import VectorSource from "ol/source/Vector";
+import { GeoJSON } from "ol/format";
 
 export function MunicipalityCheckbox({
   setMapLayers,
@@ -11,7 +20,24 @@ export function MunicipalityCheckbox({
 }) {
   const [municipalityChecked, setMunicipalityChecked] = useState(false);
 
-  useEffect(() => {}, [municipalityChecked]);
+  const municipalityLayer = useMemo(
+    () =>
+      new VectorLayer({
+        source: new VectorSource({
+          url: "/exercise-02/nor_municipality.json",
+          format: new GeoJSON(),
+        }),
+      }),
+    [],
+  );
+
+  useEffect(() => {
+    if (municipalityChecked) {
+      setMapLayers((old) => [...old, municipalityLayer]);
+    } else {
+      setMapLayers((old) => old.filter((layer) => layer !== municipalityLayer));
+    }
+  }, [municipalityChecked]);
 
   return (
     <>
