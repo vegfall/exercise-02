@@ -5,6 +5,7 @@ import { OSM } from "ol/source";
 import { useGeographic } from "ol/proj";
 import "ol/ol.css";
 import "./application.css";
+import { MunicipalityCheckbox } from "../municipality/municipalityCheckbox";
 
 useGeographic();
 
@@ -28,7 +29,9 @@ export function MapApplication() {
       <header>
         <h1>Awesome Map!</h1>
       </header>
-      <nav>Links</nav>
+      <nav>
+        <MunicipalityCheckbox />
+      </nav>
       <main ref={mapRef}></main>
     </>
   );
